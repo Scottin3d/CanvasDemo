@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>3 Lines of Code - MP5</title>
+        <link rel="stylesheet" href="styles.css">
+        <link rel ="icon" type ="image/x-icon" href="./assets/favicon.png">
+
+        <!-- external library -->
+        <script src="src/lib/gl-matrix.js"></script>
+        <!-- Core of Engine --> 
+        <script src="src/Engine/Core/Engine_Core.js"></script>
+        <script src="src/Engine/Core/Engine_VertexBuffer.js"></script>
+        <script src="src/Engine/Core/Engine_GameLoop.js"></script>
+        <script src="src/Engine/Core/Engine_Input.js"></script>
+        <!-- Resource support -->
+        <script src="src/Engine/Core/Resources/Engine_ResourceMap.js"></script>
+        <script src="src/Engine/Core/Resources/Engine_TextFileLoader.js"></script>
+        <script src="src/Engine/Core/Resources/Engine_DefaultResources.js"></script>
+        <script src="src/Engine/Core/Resources/Engine_AudioClips.js"></script>
+        <script src="src/Engine/Core/Resources/Engine_Textures.js"></script>
+        <script src="src/Engine/Core/Resources/Engine_Fonts.js"></script>
+        <script src="src/Engine/Scene.js"></script>
+        <!-- Utilities -->
+        <script src="src/Engine/Utils/Transform.js"></script>
+        <script src="src/Engine/Utils/BoundingBox.js"></script>
+        <script src="src/Engine/Utils/Interpolate.js"></script>
+        <script src="src/Engine/Utils/InterpolateVec2.js"></script>
+        <script src="src/Engine/Utils/ShakePosition.js"></script>
+        <!-- Renderables -->
+        <script src="src/Engine/Renderables/Renderable.js"></script>
+        <script src="src/Engine/Renderables/TextureRenderable.js"></script>
+        <script src="src/Engine/Renderables/TextureRenderable_PixelCollision.js"></script>
+        <script src="src/Engine/Renderables/SpriteRenderable.js"></script>
+        <script src="src/Engine/Renderables/SpriteRenderable_PixelCollision.js"></script>
+        <script src="src/Engine/Renderables/SpriteAnimateRenderable.js"></script>
+        <script src="src/Engine/Renderables/FontRenderable.js"></script>
+        <!-- GameObject -->
+        <script src="src/Engine/GameObjects/GameObject.js"></script>
+        <script src="src/Engine/GameObjects/GameObject_PixelCollision.js"></script>
+        <script src="src/Engine/GameObjects/GameObjectSet.js"></script>
+        <!-- Shaders -->
+        <script src="src/Engine/Shaders/SimpleShader.js"></script>
+        <script src="src/Engine/Shaders/TextureShader.js"></script>
+        <script src="src/Engine/Shaders/SpriteShader.js"></script>
+        <!-- Camera -->
+        <script src="src/Engine/Cameras/Camera.js"></script>
+        <script src="src/Engine/Cameras/Camera_Manipulation.js"></script>
+        <script src="src/Engine/Cameras/Camera_Input.js"></script>
+        <script src="src/Engine/Cameras/CameraState.js"></script>
+        <script src="src/Engine/Cameras/CameraShake.js"></script>
+        <!-- Client game code -->
+        <script src="src/MyGame/HomeScreen.js"></script>
+        <script src="src/MyGame/SceneManager.js"></script>
+        <script src="src/MyGame/MyGame.js"></script>
+        <script src="src/MyGame/ShapeGame.js"></script>
+        <script src="src/MyGame/CalculatorGame.js"></script>
+        <!-- Objects -->
+        <script src="src/MyGame/Objects/DyePack.js"></script>
+        <script src="src/MyGame/Objects/Hero.js"></script>
+        <script src="src/MyGame/Objects/Brain.js"></script>
+        <script src="src/MyGame/Objects/Minion.js"></script>
+        <script src="src/MyGame/Objects/TextureObject.js"></script>
+        
+        <!-- API Scripts -->
+        <script src="src/canvasUI/utilities.js"></script>
+        <script src="src/canvasUI/canvas/UIcanvas.js"></script>
+        <script src="src/canvasUI/canvas/UIcanvasUpdate.js"></script>
+        <script src="src/canvasUI/canvas/UIcanvasCreate.js"></script>
+        <script src="src/canvasUI/canvas/UIcanvasEditMode.js"></script>
+        
+        <script src="src/canvasUI/events/UIEvent.js"></script>
+        <script src="src/canvasUI/events/UIEventHandler.js"></script>
+        
+        <script src="src/canvasUI/elements/UIelement.js"></script>
+        <script src="src/canvasUI/elements/UIButton.js"></script>
+        <script src="src/canvasUI/elements/UISlider.js"></script>
+        <script src="src/canvasUI/elements/UIDropdown.js"></script>
+        <script src="src/canvasUI/elements/UIToggle.js"></script>
+        <!-- comment -->
+
+    </head>
+
+    <body onload="
+        var myGame = new HomeScreen();
+        gEngine.Core.initializeEngineCore('GLCanvas', myGame);as">
+        <canvas id="GLCanvas" width="940" height="640">
+            Your browser does not support the HTML5 canvas.
+        </canvas>    
+    </body>
+</html>
