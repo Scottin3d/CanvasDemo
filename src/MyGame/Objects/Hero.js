@@ -69,6 +69,9 @@ Hero.prototype.SetSize = function(value) {
     this.mDye.getXform().setSize(20 * value, 30 * value);
 };
 
+Hero.prototype.SetShadowSize = function(value) {
+    this.mDye.getXform().setSize(0.4 * value, 0.6 * value);
+};
 Hero.prototype.SetSpeed = function(value) {
     this.setSpeed(Math.abs(value));
 };

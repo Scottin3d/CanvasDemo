@@ -36,6 +36,7 @@ function ShapeGame() {
     this.buttons = [];
 
     // the hero and the support objects
+    this.mShadow = null;
     this.mHero = null;
     this.mBrain = null;
     this.mPortal = null;
@@ -71,37 +72,6 @@ ShapeGame.prototype.unloadScene = function () {
 
 ShapeGame.prototype.initialize = function () { 
     
-    // color variable
-    // I wrote the hexToRgb utility to help with better colors -- Scott
-    var c; 
-    // objects
-    this.mShadow = new Hero(this.kMinionSprite);
-    this.mShadow.setColor([0,0,0,1]);
-    var xPos = -90 + Math.random() * 120;
-    var yPos = -20 + Math.random() * 80;
-    xPos -= xPos % 2;
-    yPos -= yPos %2;
-    this.mShadow.getXform().setPosition(xPos, yPos);
-    this.mShadow.getXform().setRotationInDegree(Math.random() * 360);
-    this.mShadow.SetSize(10 + Math.random() * 90);
-    var randSprite = 1 + Math.random() * 4;
-    randSprite -= randSprite % 1;
-    this.mShadow.setSprite(randSprite);
-    this.mHero = new Hero(this.kMinionSprite);
-    this.mHero.setSpeed(1);   
-    this.mHero.getXform().setPosition(0,0);
-    this.mPortal = new TextureObject(this.kMinionPortal, 50, 30, 10, 10);
-    
-    this.mLMinion = new Minion(this.kMinionSprite, 30, 30);
-    this.mRMinion = new Minion(this.kMinionSprite, 70, 30);
-    this.mFocusObj = this.mHero;
-    
-    this.vBackground = new Renderable(gEngine.DefaultResources.getConstColorShader());
-    c = hexToRgb("14213d");
-    this.vBackground.setColor([c.r, c.g, c.b, c.a]);
-    this.vBackground.getXform().setPosition(10, 10);
-    this.vBackground.getXform().setSize(10, 10);
-
     this.UI = new UIcanvas();
     
     // main camera
@@ -113,16 +83,47 @@ ShapeGame.prototype.initialize = function () {
     c = hexToRgb("AAAAAA");
     this.mCamera.setBackgroundColor([c.r, c.g, c.b, c.a]);
     
+    // color variable
+    // I wrote the hexToRgb utility to help with better colors -- Scott
+    var c; 
+    // objects
+    var xPos = -90 + Math.random() * 120;
+    var yPos = -20 + Math.random() * 80;
+    xPos -= xPos % 2;
+    yPos -= yPos %2;
+    this.mHero = new Hero(this.kMinionSprite);
+    this.mHero.setSpeed(1);   
+    this.mHero.getXform().setPosition(0,0);
+    this.mPortal = new TextureObject(this.kMinionPortal, 50, 30, 10, 10);
+    
+    this.mLMinion = new Minion(this.kMinionSprite, 30, 30);
+    this.mRMinion = new Minion(this.kMinionSprite, 70, 30);
+    this.mFocusObj = this.mHero;
+    this.mShadow = new Hero(this.kMinionSprite);
+    this.mShadow.setColor([0,0,0,1]);
+    this.mShadow.getXform().setPosition(xPos, yPos);
+    this.mShadow.getXform().setRotationInDegree(Math.random() * 360);
+    this.mShadow.SetShadowSize(10 + Math.random() * 90);
+    var randSprite = 1 + Math.random() * 4;
+    randSprite -= randSprite % 1;
+    this.mShadow.setSprite(randSprite);
+//    this.vBackground = new Renderable(gEngine.DefaultResources.getConstColorShader());
+//    c = hexToRgb("14213d");
+//    this.vBackground.setColor([c.r, c.g, c.b, c.a]);
+//    this.vBackground.getXform().setPosition(10, 10);
+//    this.vBackground.getXform().setSize(10, 10);
+
+
     
     this.sliderOne = this.UI.CreateElement(this.UI.UIELEM_TYPES.Slider, [50,5], [-80, -40], [0, 360], 0, 1);
     this.sliderOne.SetTexture(this.toggleOnTexture);
     this.sliderOne.SetSliderBarTexture(this.buttonTexture);
     this.sliderOne.AddListener(this.mHero.rotate, this.mHero, null);
     
-    this.sliderTwo = this.UI.CreateElement(this.UI.UIELEM_TYPES.Slider, [50,5], [-80,-55], [.1, 2], 1, 1);
+    this.sliderTwo = this.UI.CreateElement(this.UI.UIELEM_TYPES.Slider, [50,5], [-80,-55], [10, 100], 50, 1);
     this.sliderTwo.SetTexture(this.toggleOnTexture);
     this.sliderTwo.SetSliderBarTexture(this.buttonTexture);
-    this.sliderTwo.AddListener(this.mHero.SetSize, this.mHero, null);
+    this.sliderTwo.AddListener(this.mHero.SetShadowSize, this.mHero, null);
     
     
     var opts = ["Hero", "Minion", "Brain", "DyePack"];
@@ -132,8 +133,8 @@ ShapeGame.prototype.initialize = function () {
     
     this.toggleOne = this.UI.CreateElement(this.UI.UIELEM_TYPES.Toggle, [20, 20], [90, -70], "Double Speed");
     this.toggleOne.AddListener(this.mHero._doubleSpeed, this.mHero, null);
-    this.toggleOne.SetTexture(this.toggleOffTexture);
-    this.toggleOne.SetONTexture(this.toggleOnTexture);
+//    this.toggleOne.SetTexture(this.toggleOffTexture);
+//    this.toggleOne.SetONTexture(this.toggleOnTexture);
 
     this.buttonOne = this.UI.CreateElement(this.UI.UIELEM_TYPES.Button, [50,20], [-100, -75], [1,1,1,1], ("Button"));
     this.buttonOne.SetText("Reset");
@@ -187,7 +188,7 @@ ShapeGame.prototype.drawCamera = function (camera) {
 // importantly, make sure to _NOT_ change any state.
 ShapeGame.prototype.draw = function () {
     //**Canvas / UI elements must be drawn last**
-    var c = hexToRgb("14213d");
+    var c = hexToRgb("AAAAAA");
     gEngine.Core.clearCanvas([c.r, c.g, c.b, c.a]);
     
     this.drawCamera(this.mCamera);
@@ -212,7 +213,7 @@ ShapeGame.prototype.update = function () {
         yPos -= yPos %2;
         this.mShadow.getXform().setPosition(xPos, yPos);
         this.mShadow.getXform().setRotationInDegree(Math.random() * 360);
-        this.mShadow.SetSize(10 + Math.random() * 90);
+        this.mShadow.SetShadowSize(10 + Math.random() * 90);
         var randSprite = 1 + Math.random() * 4;
         randSprite -= randSprite % 1;
         this.mShadow.setSprite(randSprite);
